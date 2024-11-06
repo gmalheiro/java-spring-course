@@ -1,5 +1,8 @@
 package com.gmalheiro.spring.spring_framework.game;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class MarioGame implements GamingConsole{
 	
 	@Override
