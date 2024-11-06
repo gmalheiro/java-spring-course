@@ -1,7 +1,12 @@
 package com.gmalheiro.spring.spring_framework.game;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
 public class GameRunner {
 	
+	@Autowired
 	private GamingConsole game;
 	
 	public GameRunner(GamingConsole game) {
