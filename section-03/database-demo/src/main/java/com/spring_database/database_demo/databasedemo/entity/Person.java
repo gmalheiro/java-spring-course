@@ -2,7 +2,14 @@ package com.spring_database.database_demo.databasedemo.entity;
 
 import java.util.Date;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+
+@Entity
 public class Person {
+	@Id
+	@GeneratedValue
 	private int id;
 	private String name;
 	private String location;
@@ -22,6 +29,15 @@ public class Person {
 		this.birthDate = birthDate;
 	}
 	
+	
+	
+	public Person(String name, String location, Date birthDate) {
+		super();
+		this.name = name;
+		this.location = location;
+		this.birthDate = birthDate;
+	}
+
 	public int getId() {
 		return id;
 	}
