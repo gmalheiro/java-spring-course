@@ -2,12 +2,14 @@ package com.java.jpa.hibernate.app.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.java.jpa.hibernate.app.entity.Course;
 
 import jakarta.persistence.EntityManager;
 
 @Repository
+@Transactional
 public class CourseRepository {
 	
 	@Autowired
@@ -18,7 +20,7 @@ public class CourseRepository {
 	}
 	
 	public void deleteById(Long id) {
-		em.remove(em.find(Course.class,id));
+		em.remove(findById(id));
 	}
 	
 	public Course insert(Course course) {
