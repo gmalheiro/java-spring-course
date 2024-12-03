@@ -1,5 +1,7 @@
 package com.java.jpa.hibernate.app.repository;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +14,10 @@ import jakarta.persistence.EntityManager;
 @Transactional
 public class CourseRepository {
 
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+
+	
 	@Autowired
 	private EntityManager em;
 
@@ -29,6 +35,16 @@ public class CourseRepository {
 			return course;
 		}
 		return em.merge(course);
+	}
+	
+	public void playWithEntityManager() {
+		logger.info("playWithEntityManager - start");
+		Course course = new Course("Web services in 100 steps");
+		em.persist(course);
+		course.setName("Web services in 100 steps - updated");
+		//while being in the scope of the transactional annotation entity manager keeps track of all the 
+		// the things that happens to the object that's why by only using 
+		// the setName it is updating without the use of merge
 	}
 
 }
