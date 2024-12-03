@@ -34,5 +34,15 @@ class CourseRepositoryTest {
 		repository.deleteById(10002L);
 		assertNull(repository.findById(10002L));
 	}
-
+	
+	@Test
+	@DirtiesContext
+	void save_basic() {
+		Course course = repository.findById(10001L);
+		course.setName("Microservices in 100 steps");
+		repository.save(course);
+		assertEquals("Microservices in 100 steps",course.getName());
+	}
+	
+	 
 }
