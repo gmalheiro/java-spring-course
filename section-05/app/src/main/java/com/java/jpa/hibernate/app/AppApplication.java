@@ -28,6 +28,7 @@ public class AppApplication implements CommandLineRunner{
 		logger.info("Course 10001 - {} ",course);
 		//repository.deleteById(10002L);
 		repository.save(new Course("Microservices in 100 steps"));
+		repository.playWithEntityManager();
 	}
 
 }
