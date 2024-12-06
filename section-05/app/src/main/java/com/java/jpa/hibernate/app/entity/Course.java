@@ -7,6 +7,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 @Entity
 @Table(name = "Course")
 public class Course {
@@ -17,6 +22,12 @@ public class Course {
 	
 	@Column(name="name", nullable = false, length = 255)
 	private String name;
+	
+	@UpdateTimestamp
+	private LocalDateTime updateDate;
+
+	@CreationTimestamp
+	private LocalDateTime createdDate;
 
 	protected Course() {
 		super();
@@ -37,6 +48,22 @@ public class Course {
 
 	public Long getId() {
 		return id;
+	}
+	
+	public LocalDateTime getLastUpdated() {
+		return updateDate;
+	}
+
+	public void setLastUpdated(LocalDateTime lastUpdated) {
+		this.updateDate = lastUpdated;
+	}
+
+	public LocalDateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(LocalDateTime createdDate) {
+		this.createdDate = createdDate;
 	}
 
 	@Override
