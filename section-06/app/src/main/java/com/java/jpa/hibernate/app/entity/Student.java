@@ -20,6 +20,8 @@ public class Student {
 	@OneToOne
 	private Passport passport;
 	
+	public Student () {}
+	
 	public Student(String name) {
 		super();
 		this.name = name;
