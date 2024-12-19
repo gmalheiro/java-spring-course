@@ -15,7 +15,9 @@ public class Passport {
 
 	@Column(nullable = false)
 	private String number;
-
+	
+	public Passport() {super();}
+	
 	public Passport(String number) {
 		super();
 		this.number = number;
