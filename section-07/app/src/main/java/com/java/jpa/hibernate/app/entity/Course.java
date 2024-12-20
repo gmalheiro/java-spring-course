@@ -5,9 +5,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -28,7 +31,10 @@ public class Course {
 
 	@CreationTimestamp
 	private LocalDateTime createdDate;
-
+	
+	@OneToMany(mappedBy = "course")
+	private List<Review> reviews = new ArrayList<Review>();
+	
 	protected Course() {
 		super();
 	}
@@ -65,7 +71,21 @@ public class Course {
 	public void setCreatedDate(LocalDateTime createdDate) {
 		this.createdDate = createdDate;
 	}
-
+	
+	
+	
+	public List<Review> getReviews() {
+		return reviews;
+	}
+	
+	public void addReview(Review review) {
+		reviews.add(review);
+	}
+	
+	public void removeReview(Review review) {
+		reviews.remove(review);
+	}
+	
 	@Override
 	public String toString() {
 		return "Course [id=" + id + ", name=" + name + "]";
