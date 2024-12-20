@@ -1,7 +1,5 @@
 package com.java.jpa.hibernate.app.repository;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +13,6 @@ import jakarta.persistence.EntityManager;
 @Transactional
 
 public class StudentRepository {
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private EntityManager em;
@@ -44,5 +41,23 @@ public class StudentRepository {
 		
 		student.setPassport(passport);
 		em.persist(student);
+	}
+	
+	public void operationToUnderstandPersistenceContext() {
+		//Database operation 1 - Retrieve student in db
+		Student student = em.find(Student.class, 2001);
+		//Persistence context (student)
+		
+		//Db operation 2 - Retrieve passport
+		Passport passport = student.getPassport();
+		//Persistence context (student,passport)
+		
+		//Db operation 3 - Update passport
+		passport.setNumber("E123457");
+		//Persistence context (student, passport++)
+		
+		//Db operation 4 - Update student
+		student.setName("Gabriel - updated");
+		//Persistence context (student++,passport++)
 	}
 }
