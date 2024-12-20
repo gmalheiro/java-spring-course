@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.java.jpa.hibernate.app.entity.Course;
+import com.java.jpa.hibernate.app.entity.Review;
 
 import jakarta.persistence.EntityManager;
 
@@ -57,6 +58,16 @@ public class CourseRepository {
 		// refresh reverts the changes made to an entity: Refresh the state of the
 		// instance from the database,
 		// overwriting changes made to the entity, if any.
+	}
+
+	@Transactional
+	public void addReviewsForCourse() {
+		Course course = em.find(Course.class,10003L);
+		Review review = new Review("Great course","5");
+		Review secondReview = new Review("Awesome course","5");
+		course.addReview(review);
+		course.addReview(secondReview);
+		em.flush();
 	}
 
 }
