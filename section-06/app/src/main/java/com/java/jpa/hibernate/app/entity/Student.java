@@ -2,6 +2,7 @@ package com.java.jpa.hibernate.app.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -17,7 +18,7 @@ public class Student {
 	@Column(nullable = false)
 	private String name;
 	
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	private Passport passport;
 	
 	public Student () {}
@@ -49,7 +50,7 @@ public class Student {
 
 	@Override
 	public String toString() {
-		return "Student [id=" + id + ", name=" + name + "]";
+		return "Student [id=" + id + ", name=" + name + ", passport= "+ passport.getNumber() +"]";
 	}
 	
 }
