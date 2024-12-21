@@ -37,7 +37,7 @@ public class Course {
 	private List<Review> reviews = new ArrayList<Review>();
 	
 	@ManyToMany(mappedBy = "courses")
-	private List<Student> students;
+	private List<Student> students = new ArrayList<Student>();
 	
 	protected Course() {
 		super();

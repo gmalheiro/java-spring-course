@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.java.jpa.hibernate.app.entity.Course;
 import com.java.jpa.hibernate.app.entity.Passport;
 import com.java.jpa.hibernate.app.entity.Student;
 
@@ -60,4 +61,12 @@ public class StudentRepository {
 		student.setName("Gabriel - updated");
 		//Persistence context (student++,passport++)
 	}
+	
+	public void addStudentWithCourse(Student student,Course course) {
+		student.addCourse(course);
+		course.addStudent(student);
+		em.persist(student);
+		em.persist(course);
+	}
+	
 }

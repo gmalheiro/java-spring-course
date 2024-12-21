@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.java.jpa.hibernate.app.entity.Course;
 import com.java.jpa.hibernate.app.entity.Review;
+import com.java.jpa.hibernate.app.entity.Student;
 
 import jakarta.persistence.EntityManager;
 
@@ -89,7 +90,15 @@ public class CourseRepository {
 			review.setCourse(course);
 			em.persist(review);
 		}
-
+	
 	}
-
+	
+	@Transactional
+	public void addCourseWithStudent(Course course, Student student) {
+		course.addStudent(student);
+		student.addCourse(course);
+		em.persist(course);
+		em.persist(student);
+	}
+	
 }
