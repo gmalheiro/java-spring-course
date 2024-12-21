@@ -62,12 +62,21 @@ public class CourseRepository {
 
 	@Transactional
 	public void addReviewsForCourse() {
-		Course course = em.find(Course.class,10003L);
-		Review review = new Review("Great course","5");
-		Review secondReview = new Review("Awesome course","5");
-		course.addReview(review);
-		course.addReview(secondReview);
-		em.flush();
+		Course course = em.find(Course.class, 10003L);
+		
+		Review review1 = new Review("5","Great hands-on stuff");
+		Review review2 = new Review("5","Hatsoff");
+		
+		course.addReview(review1);
+		review1.setCourse(course);
+		
+		course.addReview(review2);
+		review2.setCourse(course);
+		
+		em.persist(review1);
+		em.persist(review2);
+		
+		logger.info("course.getReviews() -> {} ",course.getReviews());
 	}
 
 }
