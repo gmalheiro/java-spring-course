@@ -1,6 +1,5 @@
 package com.java.jpa.hibernate.app.entity;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,7 +20,9 @@ public class Review {
 	@ManyToOne
 	private Course course;
 	
-	public Review(String description, String rating) {
+	public Review () {}
+	
+	public Review(String rating, String description) {
 		super();
 		this.description = description;
 		this.rating = rating;

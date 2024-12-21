@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -34,6 +35,9 @@ public class Course {
 	
 	@OneToMany(mappedBy = "course")
 	private List<Review> reviews = new ArrayList<Review>();
+	
+	@ManyToMany(mappedBy = "courses")
+	private List<Student> students;
 	
 	protected Course() {
 		super();
@@ -72,8 +76,6 @@ public class Course {
 		this.createdDate = createdDate;
 	}
 	
-	
-	
 	public List<Review> getReviews() {
 		return reviews;
 	}
@@ -86,6 +88,18 @@ public class Course {
 		reviews.remove(review);
 	}
 	
+	public List<Student> getStudents() {
+		return this.students;
+	}
+	
+	public void addStudent(Student student) {
+		this.students.add(student);
+	}
+	
+	public void removeStudent (Student student) {
+		this.students.remove(student);
+	}
+	 
 	@Override
 	public String toString() {
 		return "Course [id=" + id + ", name=" + name + "]";
