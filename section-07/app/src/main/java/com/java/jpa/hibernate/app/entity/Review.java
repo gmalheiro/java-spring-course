@@ -20,7 +20,9 @@ public class Review {
 	@ManyToOne
 	private Course course;
 	
-	public Review(String description, String rating) {
+	public Review () {}
+	
+	public Review(String rating, String description) {
 		super();
 		this.description = description;
 		this.rating = rating;
