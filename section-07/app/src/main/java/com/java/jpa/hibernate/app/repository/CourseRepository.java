@@ -1,5 +1,7 @@
 package com.java.jpa.hibernate.app.repository;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,22 +63,33 @@ public class CourseRepository {
 	}
 
 	@Transactional
-	public void addReviewsForCourse() {
+	public void addHardCodedReviewsForCourse() {
 		Course course = em.find(Course.class, 10003L);
-		
-		Review review1 = new Review("5","Great hands-on stuff");
-		Review review2 = new Review("5","Hatsoff");
-		
+
+		Review review1 = new Review("5", "Great hands-on stuff");
+		Review review2 = new Review("5", "Hatsoff");
+
 		course.addReview(review1);
 		review1.setCourse(course);
-		
+
 		course.addReview(review2);
 		review2.setCourse(course);
-		
+
 		em.persist(review1);
 		em.persist(review2);
-		
-		logger.info("course.getReviews() -> {} ",course.getReviews());
+
+		logger.info("course.getReviews() -> {} ", course.getReviews());
+	}
+
+	@Transactional
+	public void addReviewsForCourse(Long courseId, List<Review> reviews) {
+		Course course = em.find(Course.class, courseId);
+		for (Review review : reviews) {
+			course.addReview(review);
+			review.setCourse(course);
+			em.persist(review);
+		}
+
 	}
 
 }
